@@ -33,8 +33,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                // Launch speech intent
                 Intent speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                 speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+
+                //set speech intent UI to custom text
                 speechIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Nick's Speech-To-Text");
                 startActivityForResult(speechIntent, RECOGNIZER_RESULT);
             }
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
+        // Filter on speech intent result and set text in UI
         if(requestCode == RECOGNIZER_RESULT && resultCode == RESULT_OK){
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             speechText.setText(matches.get(0).toString());
