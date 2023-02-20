@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button   speachButton;
-    TextView speachText;
+    Button   speechButton;
+    TextView speechText;
 
     private static final int RECOGNIZER_RESULT = 1;
 
@@ -26,16 +26,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        speachButton = findViewById(R.id.button);
-        speachText = findViewById(R.id.text);
+        speechButton = findViewById(R.id.button);
+        speechText = findViewById(R.id.text);
 
-        speachButton.setOnClickListener(new View.OnClickListener() {
+        speechButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                 speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                speechIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Nick's Speach-To-Text");
+                speechIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Nick's Speech-To-Text");
                 startActivityForResult(speechIntent, RECOGNIZER_RESULT);
             }
         });
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(requestCode == RECOGNIZER_RESULT && resultCode == RESULT_OK){
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            speachText.setText(matches.get(0).toString());
+            speechText.setText(matches.get(0).toString());
         }
 
         super.onActivityResult(requestCode, resultCode, data);
